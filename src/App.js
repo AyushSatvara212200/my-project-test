@@ -9,7 +9,7 @@ function App() {
   return (
     <>
       <Routes basename="/my-project-test">
-        <Route exact path="/my-project-test/" element={<Homepage />} />
+        <Route exact path="/" element={<Homepage />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/mainpage" element={<Mainpage />} />
