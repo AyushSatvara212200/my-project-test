@@ -8,12 +8,12 @@ import { HashRouter, Route } from 'react-router-dom'
 function App() {
   return (
     <>
-      <HashRouter basename="/my-project-test">
+      <Routes basename="/my-project-test">
         <Route exact path="/my-project-test/" element={<Homepage />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/mainpage" element={<Mainpage />} />
-      </HashRouter>
+      </Routes>
     </>
   );
 }
