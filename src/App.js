@@ -10,9 +10,9 @@ function App() {
     <>
     <Routes>
       <Route exact path="/my-project-test/" element={<Homepage/>}/>
-      <Route path="/login" element={<Login/>}/>
-      <Route path="/signup" element={<Signup/>}/>
-      <Route path="/mainpage" element={<Mainpage/>}/>
+      <Route exact path="/my-project-test/login" element={<Login/>}/>
+      <Route exact path="/my-project-test/signup" element={<Signup/>}/>
+      <Route exact path="/my-project-test/mainpage" element={<Mainpage/>}/>
     </Routes>
     </>
   );
