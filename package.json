@@ -1,7 +1,7 @@
 {
   "name": "ch-frontend",
   "version": "0.1.0",
-  "homepage": "http:AyushSatvara212200.github.io/my-project-test",
+  "homepage": "https://ayushsatvara212200.github.io/my-project-test",
   "private": false,
   "dependencies": {
     "@emotion/react": "^11.10.5",
