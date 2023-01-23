@@ -3,7 +3,7 @@ import Login from './components/login'
 import Signup from './components/signup'
 import Homepage from './components/homepage'
 import Mainpage from './components/mainpage'
-import { HashRouter, Route } from 'react-router-dom'
+import { Routes, Route } from 'react-router-dom'
 
 function App() {
   return (
