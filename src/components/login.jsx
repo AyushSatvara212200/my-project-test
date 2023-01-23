@@ -6,6 +6,7 @@ import { NavLink } from "react-router-dom";
 import { AwesomeButton } from 'react-awesome-button'
 import 'react-awesome-button/dist/styles.css';
 import { Navigate } from 'react-router-dom';
+import axios from 'axios'
 
 
 //STYLED COMPONENTS
@@ -73,41 +74,49 @@ const SimpleText = styled.div`
 export default class login extends Component {
     constructor(props) {
         super(props);
-        const token = localStorage.getItem("token");
-
+        //variables
         let loggedIn = true
+        const token = localStorage.getItem("token")
+
+        //Conditions
         if (token === null) {
             loggedIn = false
         }
-        this.state={
-            username:"",
-            password:"",
+        this.state = {
+            phone: "",
+            password: "",
             loggedIn
         }
-        this.onSubmit = this.onSubmit.bind(this);
-        this.onChange = this.onChange.bind(this);
-    }
-    
 
-    async onSubmit(e) {
-        e.preventDefault();
-        const {username , password} = await this.state;
-        localStorage.setItem("token","asdhajsdiajsfadnfbsakdjfadjbf")
-        if(username === "ayush" && password === "1234"){
-            this.setState({
-                loggedIn:true
-            })
-        }
+        this.onChangeHandle = this.onChangeHandle.bind(this);
+        this.onSubmitHandle = this.onSubmitHandle.bind(this);
     }
-    onChange(e){
+    onChangeHandle(e) {
         e.preventDefault();
         this.setState({
-            [e.target.name]:e.target.value
+            ...this.state,
+            [e.target.name]: e.target.value
         })
     }
+    onSubmitHandle(e) {
+        e.preventDefault();
+        const { phone, password } = this.state;
+        if (phone && password) {
+            axios.post("http://localhost:9000/login", this.state).then((res) => {
+                alert(res.data.message);
+                // console.log(res.data.found);
+                if (res.data.found) {
+                    localStorage.setItem("token","abcdefghijklmnopqrstuvwxyz");
+                    this.setState({loggedIn:true})
+                } 
+            })
+        }else{
+            alert("Invalid")
+        }
+    }
     render() {
-        if(this.state.loggedIn){
-            return <Navigate replace to="/mainpage"/>
+        if (this.state.loggedIn) {
+            return <Navigate replace to="/mainpage" />
         }
 
         return (
@@ -122,13 +131,14 @@ export default class login extends Component {
                             <StyledTextfield
                                 id="outlined-basic"
                                 type="text"
-                                label="Username"
+                                label="Phone"
                                 variant="outlined"
                                 size="small"
-                                name="username"
-                                value={this.state.username}
-                                onChange={this.onChange}
+                                name="phone"
+                                value={this.state.phone}
+                                onChange={this.onChangeHandle}
                             />
+
                             <StyledTextfield
                                 id="outlined-basic"
                                 type="password"
@@ -138,15 +148,14 @@ export default class login extends Component {
                                 autoComplete="current-password"
                                 name="password"
                                 value={this.state.password}
-                                onChange={this.onChange}
+                                onChange={this.onChangeHandle}
                             />
-                        <h3>{this.state.password}</h3>
                         </InputContainer>
 
                         {/* Button Container */}
 
                         <ButtonContainer>
-                            <StyledButton variant="contained" onPress={this.onSubmit} >Submit</StyledButton>
+                            <StyledButton variant="contained" onPress={this.onSubmitHandle}  >Submit</StyledButton>
                         </ButtonContainer>
 
                         {/* Simple Text */}

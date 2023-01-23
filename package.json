@@ -1,7 +1,7 @@
 {
   "name": "ch-frontend",
   "version": "0.1.0",
-  "homepage": "https://AyushSatvara212200.github.io/react-gh-pages",
+  "homepage": "https://github.com/AyushSatvara212200/Project3Testing.git",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.10.5",
@@ -11,6 +11,7 @@
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "axios": "^1.2.3",
     "mui-tel-input": "^3.0.2",
     "react": "^18.2.0",
     "react-awesome-button": "^7.0.5",

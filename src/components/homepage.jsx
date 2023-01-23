@@ -61,7 +61,7 @@ const Headingtag = styled.h1`
 export default class homepage extends Component {
     constructor(props){
         super(props);
-        localStorage.removeItem("token")
+        localStorage.removeItem("token");
     }
   render() {
     return (

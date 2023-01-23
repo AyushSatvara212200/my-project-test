@@ -14,18 +14,17 @@ const StyledButton = styled(AwesomeButton)`
 `;
 
 export default class mainpage extends Component {
-    constructor(props) {
+    constructor(props){
         super(props);
-        const token = localStorage.getItem("token");
-
         let loggedIn = true
-        if (token === null) {
-            loggedIn = false
+        const token = localStorage.getItem("token")
+        
+        if(token === null){
+            loggedIn= false
         }
         this.state = {
             loggedIn
         }
-
     }
     render() {
         if (this.state.loggedIn === false) {

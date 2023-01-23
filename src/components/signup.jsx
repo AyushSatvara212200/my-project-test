@@ -5,7 +5,7 @@ import TextField from "@mui/material/TextField";
 import { NavLink } from "react-router-dom";
 import { AwesomeButton } from "react-awesome-button";
 import "react-awesome-button/dist/styles.css";
-import { MuiTelInput } from "mui-tel-input";
+import axios from 'axios'
 
 //STYLED COMPONENTS
 
@@ -52,7 +52,7 @@ const InputContainer = styled.div`
 const StyledTextfield = styled(TextField)`
   width: 70%;
 `;
-const StyledTextfieldNumber = styled(MuiTelInput)`
+const StyledTextfieldNumber = styled(TextField)`
   width: 70%;
 `;
 const ButtonContainer = styled.div`
@@ -81,17 +81,35 @@ export default class signup extends Component {
       email: "",
       password: "",
     };
-    this.onChange = this.onChange.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  onChange(e,info) {
+  handleChange(e) {
     e.preventDefault();
     this.setState({
-      [e.target.name]: e.target.value,
-    });
-    
+      ...this.state,
+      [e.target.name]: e.target.value
+    })
   }
 
+  handleSubmit(e) {
+    e.preventDefault();
+    const {username,phone,email,password} = this.state
+    if(username && phone && email && password){
+    axios.post("http://localhost:9000/signup",this.state).then((res)=>{
+      alert(res.data.message);
+    })
+    this.setState({
+      username: "",
+      phone: "",
+      email: "",
+      password: ""
+    })
+    }else{
+      alert("invalid")
+    }
+  }
   render() {
     return (
       <>
@@ -109,17 +127,17 @@ export default class signup extends Component {
                 size="small"
                 name="username"
                 value={this.state.username}
-                onChange={this.onChange}
+                onChange={this.handleChange}
               />
               <StyledTextfieldNumber
                 id="outlined-basic"
                 size="small"
-                placeholder="Phone number"
+                label="Phone number"
                 variant="outlined"
                 name="phone"
                 value={this.state.phone}
-                onChange={this.onChange}
-                
+                onChange={this.handleChange}
+
               />
               <StyledTextfield
                 id="outlined-basic"
@@ -128,7 +146,7 @@ export default class signup extends Component {
                 size="small"
                 name="email"
                 value={this.state.email}
-                onChange={this.onChange}
+                onChange={this.handleChange}
               />
               <StyledTextfield
                 id="outlined-basic"
@@ -138,14 +156,14 @@ export default class signup extends Component {
                 autoComplete="new-password"
                 name="password"
                 value={this.state.password}
-                onChange={this.onChange}
+                onChange={this.handleChange}
               />
             </InputContainer>
 
             {/* Button Container  */}
 
             <ButtonContainer>
-              <StyledButton type="primary">Register</StyledButton>
+              <StyledButton type="primary" onPress={this.handleSubmit}>Register</StyledButton>
             </ButtonContainer>
 
             {/* Simple text */}
